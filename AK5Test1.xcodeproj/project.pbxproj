@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,6 +11,8 @@
 		1DE9B90E25620EAF0060FA64 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DE9B90D25620EAF0060FA64 /* ContentView.swift */; };
 		1DE9B91025620EB20060FA64 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DE9B90F25620EB20060FA64 /* Assets.xcassets */; };
 		1DE9B91325620EB20060FA64 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1DE9B91225620EB20060FA64 /* Preview Assets.xcassets */; };
+		1DE9B91D25620EE40060FA64 /* AudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1DE9B91C25620EE40060FA64 /* AudioKit */; };
+		1DF9630F2567570E00498329 /* alphabet.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 1DF9630E2567570E00498329 /* alphabet.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,7 @@
 		1DE9B90F25620EB20060FA64 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1DE9B91225620EB20060FA64 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		1DE9B91425620EB20060FA64 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1DF9630E2567570E00498329 /* alphabet.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = alphabet.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +30,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1DE9B91D25620EE40060FA64 /* AudioKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,6 +56,7 @@
 		1DE9B90A25620EAF0060FA64 /* AK5Test1 */ = {
 			isa = PBXGroup;
 			children = (
+				1DF9630D256756D300498329 /* Samples */,
 				1DE9B90B25620EAF0060FA64 /* AK5Test1App.swift */,
 				1DE9B90D25620EAF0060FA64 /* ContentView.swift */,
 				1DE9B90F25620EB20060FA64 /* Assets.xcassets */,
@@ -67,6 +72,14 @@
 				1DE9B91225620EB20060FA64 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1DF9630D256756D300498329 /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				1DF9630E2567570E00498329 /* alphabet.mp3 */,
+			);
+			path = Samples;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -85,6 +98,9 @@
 			dependencies = (
 			);
 			name = AK5Test1;
+			packageProductDependencies = (
+				1DE9B91C25620EE40060FA64 /* AudioKit */,
+			);
 			productName = AK5Test1;
 			productReference = 1DE9B90825620EAF0060FA64 /* AK5Test1.app */;
 			productType = "com.apple.product-type.application";
@@ -112,6 +128,9 @@
 				Base,
 			);
 			mainGroup = 1DE9B8FF25620EAF0060FA64;
+			packageReferences = (
+				1DE9B91B25620EE40060FA64 /* XCRemoteSwiftPackageReference "AudioKit" */,
+			);
 			productRefGroup = 1DE9B90925620EAF0060FA64 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1DE9B91325620EB20060FA64 /* Preview Assets.xcassets in Resources */,
+				1DF9630F2567570E00498329 /* alphabet.mp3 in Resources */,
 				1DE9B91025620EB20060FA64 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +348,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1DE9B91B25620EE40060FA64 /* XCRemoteSwiftPackageReference "AudioKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKit";
+			requirement = {
+				branch = "v5-main";
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1DE9B91C25620EE40060FA64 /* AudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1DE9B91B25620EE40060FA64 /* XCRemoteSwiftPackageReference "AudioKit" */;
+			productName = AudioKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1DE9B90025620EAF0060FA64 /* Project object */;
 }
