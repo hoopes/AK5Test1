@@ -9,44 +9,47 @@ import SwiftUI
 import AudioKit
 import AVFoundation
 
-//class PlayerController {
-//
-//    var player = AudioPlayer()
-//
-//    func load(filename: String) {
-//        player.stop()
-//        let url = Bundle.main.resourceURL?.appendingPathComponent("Samples/\(filename)")
-//        let file = try! AVAudioFile(forReading: url!)
-//        let buffer = try! AVAudioPCMBuffer(file: file)!
-//        player.scheduleBuffer(buffer, at: nil, options: .loops)
-//        player.play()
-//    }
-//}
-
 class AKTest {
-        
-    init() {
-        let engine = AudioEngine()
-        
-        let mixer = Mixer()
-        mixer.volume = 1
-        
-        engine.output = mixer
-        try! engine.start()
-        
-        let noise = WhiteNoise()
-        mixer.addInput(noise)
-        
-        noise.amplitude = 1
-        noise.start()
+    
+    let engine = AudioEngine()
+    let outputMixer = Mixer()
+    let player = AudioPlayer()
+    
+    func start() {
+        mixer.addInput(player)
 
-        //        let player = AudioPlayer()
-        //        mixer.addInput(player)
-        //        let url = Bundle.main.resourceURL?.appendingPathComponent("alphabet.mp3")
-        //        let file = try! AVAudioFile(forReading: url!)
-        //        let buffer = try! AVAudioPCMBuffer(file: file)!
-        //        player.scheduleBuffer(buffer, at: nil, options: .loops)
-        //        player.play()
+        engine.output = outputMixer
+        try! engine.start()
+    }
+    
+    /** Play an mp3 on the main player */
+    func works() {
+        playMp3(p: player)
+    }
+    
+    /** Create a player and attach it to the main mixer */
+    func alsoWorks() {
+        let p1 = AudioPlayer()
+        outputMixer.addInput(p1)
+        
+        playMp3(p: p1)
+    }
+    
+    /** Try to add a mixer with a player to the main mixer */
+    func doesNotWork() {
+        let p2 = AudioPlayer()
+        let localMixer = Mixer()
+        
+        localMixer.addInput(p2)
+        outputMixer.addInput(localMixer)
+        
+        playMp3(p: p2)
+    }
+    
+    func playMp3(p: AudioPlayer) -> Void {
+        let url = URL(string: "file:///tmp/alphabet.mp3")!
+        p.scheduleFile(url, at: nil, options: .loops)
+        p.play()
     }
 }
 
@@ -57,7 +60,10 @@ struct AK5Test1App: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            Button("Click me to initialize", action: { whatever.start() })
+            Button("Works", action: { whatever.works() })
+            Button("Also Works", action: { whatever.alsoWorks() })
+            Button("Ain't Work", action: { whatever.doesNotWork() })
         }
     }
 }
