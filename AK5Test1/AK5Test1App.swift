@@ -13,18 +13,18 @@ class AKTest {
     
     let engine = AudioEngine()
     let outputMixer = Mixer()
-    let player = AudioPlayer()
+    let globalPlayer = AudioPlayer()
     
     func start() {
-        mixer.addInput(player)
-
+        outputMixer.addInput(globalPlayer)
+        
         engine.output = outputMixer
         try! engine.start()
     }
     
     /** Play an mp3 on the main player */
     func works() {
-        playMp3(p: player)
+        playMp3(p: globalPlayer)
     }
     
     /** Create a player and attach it to the main mixer */
@@ -43,12 +43,15 @@ class AKTest {
         localMixer.addInput(p2)
         outputMixer.addInput(localMixer)
         
+        print ("TREE:")
+        print (engine.connectionTreeDescription)
+        
         playMp3(p: p2)
     }
     
     func playMp3(p: AudioPlayer) -> Void {
-        let url = URL(string: "file:///tmp/alphabet.mp3")!
-        p.scheduleFile(url, at: nil, options: .loops)
+        let url = URL(string: "file:///tmp/mpthreetest.mp3")!
+        try! p.load(url: url)
         p.play()
     }
 }
@@ -60,10 +63,16 @@ struct AK5Test1App: App {
     
     var body: some Scene {
         WindowGroup {
-            Button("Click me to initialize", action: { whatever.start() })
-            Button("Works", action: { whatever.works() })
-            Button("Also Works", action: { whatever.alsoWorks() })
-            Button("Ain't Work", action: { whatever.doesNotWork() })
+            VStack {
+//                Button("Click me to initialize", action: { whatever.start() })
+                Button("Works", action: { whatever.works() })
+                Button("Also Works", action: { whatever.alsoWorks() })
+                Button("Ain't Work", action: { whatever.doesNotWork() })
+            }.onAppear {
+                print ("APPEAR")
+                whatever.start()
+            }
         }
     }
+    
 }
